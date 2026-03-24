@@ -371,6 +371,7 @@
     transform: translateX(-50%);
     padding: 7px;
     border-radius: 10px;
+    display: none;
   }
 
   .main-terminal-qr:hover {
