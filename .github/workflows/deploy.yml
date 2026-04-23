@@ -24,9 +24,13 @@ jobs:
 
       - name: Build app
         run: npm run build
+        env:
+          CI: false
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
+          user_name: github-actions
+          user_email: github-actions@github.com
