@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkaqib_faraz_portfolio=globalThis.webpackChunkaqib_faraz_portfolio||[]).push([[925],{925(a,i,o){a.exports=o.p+"static/media/python-web-scraping.af0f517c1f4573a105b6.md"}}]);
