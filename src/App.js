@@ -1,4 +1,8 @@
 import { useState, useEffect, useRef } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BlogList from "./blog/BlogList";
+import BlogPost from "./blog/BlogPost";
+
 const aqibPhoto = "/aqib-photo.png";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
@@ -278,14 +282,15 @@ function Nav({ scrollY, isMobile }) {
         borderBottom: solid ? "1px solid rgba(0,204,153,0.07)" : "none",
         transition: "all 0.5s ease",
       }}>
-        <span style={{
+        <a href="/" style={{
           fontFamily: "'Space Mono',monospace", fontSize: 13,
           letterSpacing: "0.24em", color: "#00cc99",
           textTransform: "uppercase", fontWeight: 700,
-        }}>AF_DEV</span>
+          textDecoration: "none",
+        }}>AF_DEV</a>
 
         {!isMobile && (
-          <div style={{ display: "flex", gap: 36 }}>
+          <div style={{ display: "flex", gap: 36, alignItems: "center" }}>
             {links.map(l => (
               <a key={l} href={`#${l.toLowerCase()}`} style={{
                 fontFamily: "'Space Mono',monospace", fontSize: 11,
@@ -297,6 +302,15 @@ function Nav({ scrollY, isMobile }) {
                 onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}
               >{l}</a>
             ))}
+            <a href="/blog" style={{
+              fontFamily: "'Space Mono',monospace", fontSize: 11,
+              letterSpacing: "0.18em", textTransform: "uppercase",
+              color: "rgba(255,255,255,0.4)", textDecoration: "none",
+              transition: "color 0.2s",
+            }}
+              onMouseEnter={e => e.target.style.color = "#00cc99"}
+              onMouseLeave={e => e.target.style.color = "rgba(255,255,255,0.4)"}
+            >Blog</a>
           </div>
         )}
 
@@ -347,6 +361,12 @@ function Nav({ scrollY, isMobile }) {
               padding: "15px 0", borderBottom: "1px solid rgba(255,255,255,0.04)",
             }}>{l}</a>
           ))}
+          <a href="/blog" onClick={() => setOpen(false)} style={{
+            display: "block", fontFamily: "'Space Mono',monospace",
+            fontSize: 13, letterSpacing: "0.18em", textTransform: "uppercase",
+            color: "rgba(255,255,255,0.55)", textDecoration: "none",
+            padding: "15px 0", borderBottom: "1px solid rgba(255,255,255,0.04)",
+          }}>Blog</a>
           <a href="mailto:Aqibfahraz@gmail.com" style={{
             display: "inline-block", marginTop: 20,
             fontFamily: "'Space Mono',monospace", fontSize: 11,
@@ -1050,6 +1070,21 @@ function SectionLabel({ num, title }) {
   );
 }
 
+// ─── HOME PAGE ────────────────────────────────────────────────────────────────
+function Home({ mouse, scrollY, isMobile }) {
+  return (
+    <>
+      <Hero mouse={mouse} isMobile={isMobile} />
+      <StatsBar />
+      <Work />
+      <StackSection />
+      <About />
+      <Contact />
+      <Footer />
+    </>
+  );
+}
+
 // ─── APP ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const mouse = useMouse();
@@ -1057,7 +1092,7 @@ export default function App() {
   const isMobile = useIsMobile();
 
   return (
-    <>
+    <Router>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1072,6 +1107,94 @@ export default function App() {
         ::-webkit-scrollbar-track { background: #02060a; }
         ::-webkit-scrollbar-thumb { background: rgba(0,204,153,0.3); border-radius: 2px; }
         a { cursor: none; }
+        
+        /* Blog markdown styling */
+        .blog-content {
+          color: #ccc;
+          line-height: 1.8;
+          font-size: 16px;
+        }
+
+        .blog-content h1,
+        .blog-content h2,
+        .blog-content h3 {
+          color: #eef2f6;
+          margin: 32px 0 16px;
+          line-height: 1.3;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .blog-content h2 { font-size: 24px; }
+        .blog-content h3 { font-size: 20px; }
+
+        .blog-content p { margin-bottom: 20px; font-family: 'Space Mono', monospace; }
+
+        .blog-content code {
+          background: rgba(0, 204, 153, 0.1);
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-family: 'Fira Code', monospace;
+          font-size: 14px;
+          color: #00ff88;
+        }
+
+        .blog-content pre {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(0, 204, 153, 0.15);
+          border-radius: 8px;
+          padding: 20px;
+          overflow-x: auto;
+          margin-bottom: 24px;
+        }
+
+        .blog-content pre code {
+          background: none;
+          padding: 0;
+          font-size: 13px;
+          color: #ddd;
+        }
+
+        .blog-content a {
+          color: #00cc99;
+          text-decoration: none;
+          transition: opacity 0.2s;
+        }
+        .blog-content a:hover { opacity: 0.8; text-decoration: underline; }
+
+        .blog-content ul, .blog-content ol {
+          margin: 0 0 20px 24px;
+          font-family: 'Space Mono', monospace;
+        }
+        .blog-content li { margin-bottom: 8px; }
+
+        .blog-content blockquote {
+          border-left: 3px solid #444;
+          padding-left: 16px;
+          color: #888;
+          margin: 24px 0;
+          font-style: italic;
+          font-family: 'Space Mono', monospace;
+        }
+
+        .blog-content table {
+          width: 100%;
+          border-collapse: collapse;
+          margin: 24px 0;
+        }
+
+        .blog-content table th,
+        .blog-content table td {
+          border: 1px solid rgba(0, 204, 153, 0.1);
+          padding: 12px;
+          text-align: left;
+          font-family: 'Space Mono', monospace;
+        }
+
+        .blog-content table th {
+          background: rgba(0, 204, 153, 0.05);
+          color: #00cc99;
+        }
+        
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
         @keyframes scrollPulse {
           0%,100%{opacity:.38;transform:scaleY(1)}
@@ -1090,13 +1213,12 @@ export default function App() {
 
       <Cursor pos={mouse} isMobile={isMobile} />
       <Nav scrollY={scrollY} isMobile={isMobile} />
-      <Hero mouse={mouse} isMobile={isMobile} />
-      <StatsBar />
-      <Work />
-      <StackSection />
-      <About />
-      <Contact />
-      <Footer />
-    </>
+
+      <Routes>
+        <Route path="/" element={<Home mouse={mouse} scrollY={scrollY} isMobile={isMobile} />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+    </Router>
   );
 }
