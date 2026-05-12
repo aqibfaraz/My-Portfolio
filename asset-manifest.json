@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/static/js/main.9fd1ad75.js",
+    "main.js": "/static/js/main.f9031898.js",
     "static/js/830.e098fedb.chunk.js": "/static/js/830.e098fedb.chunk.js",
     "static/js/522.c2385dc1.chunk.js": "/static/js/522.c2385dc1.chunk.js",
     "static/js/925.765b3130.chunk.js": "/static/js/925.765b3130.chunk.js",
@@ -8,9 +8,9 @@
     "static/media/flutter-vs-react-native.md": "/static/media/flutter-vs-react-native.0abe790b2fb36fae77c9.md",
     "static/media/python-web-scraping.md": "/static/media/python-web-scraping.af0f517c1f4573a105b6.md",
     "static/media/mern-stack-guide.md": "/static/media/mern-stack-guide.a5f0cfe2b66e2ac52d60.md",
-    "main.9fd1ad75.js.map": "/static/js/main.9fd1ad75.js.map"
+    "main.f9031898.js.map": "/static/js/main.f9031898.js.map"
   },
   "entrypoints": [
-    "static/js/main.9fd1ad75.js"
+    "static/js/main.f9031898.js"
   ]
 }
