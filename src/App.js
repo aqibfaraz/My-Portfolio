@@ -461,15 +461,26 @@ function Hero({ mouse, isMobile }) {
           margin: "0 0 22px", letterSpacing: "-0.035em",
         }}>
           <span style={{
+            position: "absolute",
+            width: 1,
+            height: 1,
+            padding: 0,
+            margin: -1,
+            overflow: "hidden",
+            clip: "rect(0, 0, 0, 0)",
+            whiteSpace: "nowrap",
+            border: 0,
+          }}>Aqib Faraz - Full-Stack Developer</span>
+          <span style={{
             display: "block",
             opacity: vis ? 1 : 0, transform: vis ? "none" : "translateX(-28px)",
             transition: "all 0.95s cubic-bezier(0.16,1,0.3,1) 0.1s",
-          }}>Aqib</span>
+          }} aria-hidden="true">Aqib</span>
           <span style={{
             display: "block", color: "#00cc99",
             opacity: vis ? 1 : 0, transform: vis ? "none" : "translateX(-28px)",
             transition: "all 0.95s cubic-bezier(0.16,1,0.3,1) 0.22s",
-          }}>Faraz<span style={{ color: "#eef2f6" }}>.</span></span>
+          }} aria-hidden="true">Faraz<span style={{ color: "#eef2f6" }}>.</span></span>
         </h1>
 
         {/* Typewriter */}

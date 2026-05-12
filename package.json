@@ -16,10 +16,18 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "cp build/index.html build/404.html && mkdir -p build/blog && cp build/index.html build/blog/index.html",
+    "seo:prerender": "react-snap",
+    "build:seo": "react-scripts build && react-snap",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "reactSnap": {
+    "source": "build"
+  },
+  "devDependencies": {
+    "react-snap": "^1.23.0"
   },
   "eslintConfig": {
     "extends": [
