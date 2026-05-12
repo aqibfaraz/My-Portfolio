@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import BlogList from "./blog/BlogList";
 import BlogPost from "./blog/BlogPost";
 
@@ -1085,6 +1085,72 @@ function Home({ mouse, scrollY, isMobile }) {
   );
 }
 
+function NotFound() {
+  return (
+    <div style={{
+      minHeight: "100vh",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "100px 24px",
+      textAlign: "center",
+      background: "radial-gradient(circle at top, rgba(0,204,153,0.08), transparent 42%), #02060a",
+      color: "#eef2f6",
+    }}>
+      <div style={{ maxWidth: 620 }}>
+        <div style={{
+          fontFamily: "'Space Mono',monospace",
+          letterSpacing: "0.3em",
+          textTransform: "uppercase",
+          color: "#00cc99",
+          fontSize: 12,
+          marginBottom: 18,
+        }}>Oops</div>
+        <h1 style={{
+          fontFamily: "'Plus Jakarta Sans',sans-serif",
+          fontSize: "clamp(44px, 8vw, 88px)",
+          lineHeight: 0.95,
+          margin: 0,
+          letterSpacing: "-0.04em",
+        }}>Page not found</h1>
+        <p style={{
+          margin: "18px 0 0",
+          color: "rgba(255,255,255,0.45)",
+          fontFamily: "'Space Mono',monospace",
+          fontSize: 13,
+          lineHeight: 1.8,
+        }}>
+          Yeh page exist nahi karta ya move ho chuka hai.
+        </p>
+        <div style={{ marginTop: 34, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+          <Link to="/" style={{
+            fontFamily: "'Space Mono',monospace",
+            fontSize: 11,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            background: "#00cc99",
+            color: "#02060a",
+            padding: "14px 24px",
+            textDecoration: "none",
+            fontWeight: 700,
+          }}>Go Home</Link>
+          <Link to="/blog" style={{
+            fontFamily: "'Space Mono',monospace",
+            fontSize: 11,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "#eef2f6",
+            padding: "14px 24px",
+            textDecoration: "none",
+            fontWeight: 700,
+            border: "1px solid rgba(255,255,255,0.14)",
+          }}>Blog</Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── APP ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const mouse = useMouse();
@@ -1218,6 +1284,7 @@ export default function App() {
         <Route path="/" element={<Home mouse={mouse} scrollY={scrollY} isMobile={isMobile} />} />
         <Route path="/blog" element={<BlogList />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

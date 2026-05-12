@@ -272,11 +272,54 @@ export default function BlogPost() {
 
   if (!post) return (
     <div style={{
-      minHeight: "100vh", background: "#02060a",
-      display: "flex", alignItems: "center", justifyContent: "center",
-      fontFamily: "'Space Mono',monospace", color: "rgba(255,255,255,0.3)",
+      minHeight: "100vh",
+      background: "radial-gradient(circle at top, rgba(0,204,153,0.08), transparent 42%), #02060a",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "100px 24px",
+      textAlign: "center",
+      color: "#eef2f6",
     }}>
-      Post not found. <Link to="/blog" style={{ color: "#00cc99", marginLeft: 8 }}>← Back to Blog</Link>
+      <div style={{ maxWidth: 620 }}>
+        <div style={{
+          fontFamily: "'Space Mono',monospace",
+          letterSpacing: "0.3em",
+          textTransform: "uppercase",
+          color: "#00cc99",
+          fontSize: 12,
+          marginBottom: 18,
+        }}>Oops</div>
+        <h1 style={{
+          fontFamily: "'Plus Jakarta Sans',sans-serif",
+          fontSize: "clamp(44px, 8vw, 88px)",
+          lineHeight: 0.95,
+          margin: 0,
+          letterSpacing: "-0.04em",
+        }}>Post not found</h1>
+        <p style={{
+          margin: "18px 0 0",
+          color: "rgba(255,255,255,0.45)",
+          fontFamily: "'Space Mono',monospace",
+          fontSize: 13,
+          lineHeight: 1.8,
+        }}>
+          Yeh blog post exist nahi karta.
+        </p>
+        <Link to="/blog" style={{
+          display: "inline-block",
+          marginTop: 34,
+          fontFamily: "'Space Mono',monospace",
+          fontSize: 11,
+          letterSpacing: "0.18em",
+          textTransform: "uppercase",
+          background: "#00cc99",
+          color: "#02060a",
+          padding: "14px 24px",
+          textDecoration: "none",
+          fontWeight: 700,
+        }}>Back to Blog</Link>
+      </div>
     </div>
   );
 
