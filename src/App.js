@@ -7,13 +7,11 @@ const aqibPhoto = "/aqib-photo.png";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const ROLES = [
-  const ROLES = [
   "Full-Stack Web Developer",
   "MERN Stack Developer",
   "Python Automation Developer",
   "Flutter Mobile App Developer",
   "Remote Software Engineer"
-];
 ];
 const PROJECTS = [
   {
