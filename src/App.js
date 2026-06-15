@@ -7,51 +7,79 @@ const aqibPhoto = "/aqib-photo.png";
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const ROLES = [
-  "Full-Stack Developer",
-  "AI & Automation Engineer",
-  "MERN Stack Specialist",
-  "Python Scraping Expert",
-  "Remote-First Builder",
+  const ROLES = [
+  "Full-Stack Web Developer",
+  "MERN Stack Developer",
+  "Python Automation Developer",
+  "Flutter Mobile App Developer",
+  "Remote Software Engineer"
 ];
-
+];
 const PROJECTS = [
   {
-    id: "01", title: "AI Scraping Engine",
-    tags: ["Python", "NLP", "Selenium", "BeautifulSoup"],
-    desc: "Automated data pipeline extracting, cleaning and classifying web data at scale using NLP — eliminating 90% of manual data entry.",
-    metric: "10× faster", year: "2024",
+    id: "01",
+    title: "Web Data Automation System",
+    tags: ["Python", "Selenium", "BeautifulSoup"],
+    desc: "Built automation scripts to extract and structure web data for business reporting and analytics.",
+    metric: "Production Use",
+    year: "2024",
   },
   {
-    id: "02", title: "MERN SaaS Platform",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
-    desc: "Multi-tenant SaaS with role-based access, real-time dashboards, and billing. Shipped end-to-end in 6 weeks.",
-    metric: "6 wk delivery", year: "2024",
+    id: "02",
+    title: "MERN SaaS Dashboard",
+    tags: ["React", "Node.js", "MongoDB", "Express"],
+    desc: "Developed a full-stack SaaS dashboard with authentication, roles and API integration.",
+    metric: "Live Project",
+    year: "2024",
   },
   {
-    id: "03", title: "Flutter Logistics App",
+    id: "03",
+    title: "Flutter Mobile Application",
     tags: ["Flutter", "Dart", "Firebase"],
-    desc: "Cross-platform mobile app for real-time logistics tracking with offline support and live map views.",
-    metric: "4.8★ rating", year: "2023",
+    desc: "Cross-platform mobile app with real-time features and clean UI for Android & iOS.",
+    metric: "Deployed",
+    year: "2023",
   },
   {
-    id: "04", title: "ML Price Predictor",
-    tags: ["Python", "Scikit-learn", "FastAPI"],
-    desc: "Regression model trained on historical market data served as a live FastAPI endpoint.",
-    metric: "82% accuracy", year: "2023",
+    id: "04",
+    title: "Machine Learning Model API",
+    tags: ["Python", "FastAPI", "Scikit-learn"],
+    desc: "Built and deployed a machine learning model as a REST API for prediction tasks.",
+    metric: "API Service",
+    year: "2023",
   },
 ];
-
 const STACK = [
-  { name: "React.js", cat: "Frontend" }, { name: "Node.js", cat: "Backend" },
-  { name: "Python", cat: "Backend" }, { name: "Flutter", cat: "Mobile" },
-  { name: "MongoDB", cat: "Database" }, { name: "PostgreSQL", cat: "Database" },
-  { name: "Selenium", cat: "Automation" }, { name: "BeautifulSoup", cat: "Automation" },
-  { name: "NLP / ML", cat: "AI" }, { name: "FastAPI", cat: "Backend" },
-  { name: "REST APIs", cat: "Integration" }, { name: "HTML/CSS/JS", cat: "Frontend" },
+  // Frontend
+  { name: "React.js", cat: "Frontend" },
+  { name: "HTML/CSS/JS", cat: "Frontend" },
+
+  // Backend
+  { name: "Node.js", cat: "Backend" },
+  { name: "Express.js", cat: "Backend" },
+  { name: "Python", cat: "Backend" },
+  { name: "FastAPI", cat: "Backend" },
+
+  // Database
+  { name: "MongoDB", cat: "Database" },
+  { name: "PostgreSQL", cat: "Database" },
+
+  // Mobile
+  { name: "Flutter", cat: "Mobile" },
+  { name: "Dart", cat: "Mobile" },
+
+  // Automation / AI
+  { name: "Web Scraping", cat: "Automation" },
+  { name: "Selenium", cat: "Automation" },
+  { name: "BeautifulSoup", cat: "Automation" },
+  { name: "Machine Learning", cat: "AI" },
+
+  // APIs
+  { name: "REST APIs", cat: "Integration" },
 ];
 
 const STATS = [
-  { val: "50+", label: "Projects" }, { val: "1+yr", label: "Experience" },
+  { val: "50+", label: "Projects" }, { val: "2+yr", label: "Experience" },
   { val: "3", label: "Continents" }, { val: "100%", label: "Remote" },
 ];
 
