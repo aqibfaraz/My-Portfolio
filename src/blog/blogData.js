@@ -1,4 +1,6 @@
+﻿// src/blog/blogData.js
 // Blog posts metadata
+
 const BLOG_POSTS = [
   {
     id: "mern-stack-guide",
@@ -23,7 +25,7 @@ const BLOG_POSTS = [
   {
     id: "flutter-vs-react-native",
     slug: "flutter-vs-react-native",
-    title: "Flutter vs React Native in 2025 — Which to Choose?",
+    title: "Flutter vs React Native in 2025 â€” Which to Choose?",
     date: "2025-04-28",
     tags: ["Flutter", "React Native", "Mobile Development"],
     excerpt:
@@ -33,3 +35,4 @@ const BLOG_POSTS = [
 ];
 
 export default BLOG_POSTS;
+
