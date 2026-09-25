@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkaqib_faraz_portfolio=globalThis.webpackChunkaqib_faraz_portfolio||[]).push([[522],{522(a,i,e){a.exports=e.p+"static/media/mern-stack-guide.a5f0cfe2b66e2ac52d60.md"}}]);
