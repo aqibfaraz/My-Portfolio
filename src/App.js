@@ -2457,6 +2457,17 @@ function AppContent() {
   const location = useLocation();
   const [contactSide, setContactSide] = useState(null);
 
+  useEffect(() => {
+    if (typeof window.gtag !== "function") return;
+
+    const pagePath = `${location.pathname}${location.search}${location.hash}`;
+    window.gtag("event", "page_view", {
+      page_path: pagePath,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }, [location]);
+
   return (
     <>
       <style>{`
