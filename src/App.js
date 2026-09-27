@@ -750,7 +750,8 @@ function Hero({ isMobile, scrollY }) {
           <video
             ref={heroVideoRef}
             src="/Hero%20Section.mp4"
-            autoPlay loop playsInline muted={videoMuted} preload="auto"
+            autoPlay loop playsInline muted={videoMuted} preload="metadata"
+            poster="/new%20projects.jpg"
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
           <button
