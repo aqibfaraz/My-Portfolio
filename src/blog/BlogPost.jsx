@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import BLOG_POSTS from "./blogData";
 import BlogNav from "./BlogNav";
+import { resetPageMetadata, setPageMetadata } from "../seo";
 
 // â”€â”€â”€ REUSED HOOKS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function useMouse() {
@@ -254,6 +255,17 @@ export default function BlogPost() {
   const post = BLOG_POSTS.find(p => p.slug === slug);
 
   useEffect(() => {
+    if (!post) return resetPageMetadata;
+    setPageMetadata({
+      title: `${post.title} | Aqib Faraz`,
+      description: post.excerpt,
+      path: `/blog/notes/${post.slug}/`,
+      type: "article",
+    });
+    return resetPageMetadata;
+  }, [post]);
+
+  useEffect(() => {
     setLoading(true);
     setVis(false);
     import(`./posts/${slug}.md`)
@@ -356,7 +368,7 @@ export default function BlogPost() {
         transition: "all 0.9s cubic-bezier(0.16,1,0.3,1)",
       }}>
 
-        {/* â† Back button â€” proper Link, no browser back needed */}
+        {/* <- Back button - proper Link, no browser back needed */}
         <Link
           to="/blog"
           style={{

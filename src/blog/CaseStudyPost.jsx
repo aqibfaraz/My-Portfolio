@@ -2,6 +2,7 @@
 import { Link, useParams } from "react-router-dom";
 import CASE_STUDIES from "./caseStudyData";
 import BlogNav from "./BlogNav";
+import { resetPageMetadata, setPageMetadata } from "../seo";
 
 function CaseStudyNav() {
   const [open, setOpen] = useState(false);
@@ -69,17 +70,14 @@ export default function CaseStudyPost() {
   const study = CASE_STUDIES.find(item => item.slug === slug);
 
   useEffect(() => {
-    if (study) {
-      document.title = study.seoTitle;
-      let description = document.querySelector('meta[name="description"]');
-      if (!description) {
-        description = document.createElement("meta");
-        description.name = "description";
-        document.head.appendChild(description);
-      }
-      description.content = study.metaDescription;
-    }
-    return () => { document.title = "Custom CRM, Design, App & Web Development | Aqib Faraz"; };
+    if (!study) return resetPageMetadata;
+    setPageMetadata({
+      title: study.seoTitle,
+      description: study.metaDescription,
+      path: `/blog/${study.slug}/`,
+      type: "article",
+    });
+    return resetPageMetadata;
   }, [study]);
 
   if (!study) {

@@ -617,6 +617,7 @@ function Hero({ isMobile, scrollY }) {
   const [vis, setVis] = useState(false);
   const [videoHov, setVideoHov] = useState(false);
   const [videoMuted, setVideoMuted] = useState(true);
+  const heroVideoRef = useRef(null);
   const [showProfilePhoto, setShowProfilePhoto] = useState(false);
   const [isNarrowDesktop, setIsNarrowDesktop] = useState(false);
   useEffect(() => {
@@ -684,6 +685,18 @@ function Hero({ isMobile, scrollY }) {
           height: lerp(slot.h, vh, progress),
           radius: lerp(10, 0, progress),
         };
+  const hasVideo = Boolean(videoBox);
+  useEffect(() => {
+    if (!hasVideo || !heroVideoRef.current) return;
+    const video = heroVideoRef.current;
+    const startPlayback = () => {
+      video.muted = true;
+      video.play().catch(() => {});
+    };
+    if (video.readyState >= 2) startPlayback();
+    else video.addEventListener("loadeddata", startPlayback, { once: true });
+    return () => video.removeEventListener("loadeddata", startPlayback);
+  }, [hasVideo]);
   useEffect(() => { const t = setTimeout(() => setVis(true), 150); return () => clearTimeout(t); }, []);
 
   return (
@@ -735,8 +748,9 @@ function Hero({ isMobile, scrollY }) {
           }}
         >
           <video
+            ref={heroVideoRef}
             src="/Hero%20Section.mp4"
-            autoPlay loop playsInline muted={videoMuted}
+            autoPlay loop playsInline muted={videoMuted} preload="auto"
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
           <button
@@ -840,7 +854,7 @@ function Hero({ isMobile, scrollY }) {
             clip: "rect(0, 0, 0, 0)",
             whiteSpace: "nowrap",
             border: 0,
-          }}>Aqib Faraz â€” Software, Data &amp; Systems Developer</span>
+          }}>Aqib Faraz - Software, Data &amp; Systems Developer</span>
           <span style={{
             display: "block",
             opacity: vis ? 1 : 0, transform: vis ? "none" : "translateX(-28px)",
@@ -929,7 +943,7 @@ function Hero({ isMobile, scrollY }) {
             color: "rgba(255,255,255,0.45)",
             margin: "0 0 22px",
           }}>
-            I build web platforms, automation pipelines, and full-stack products â€”
+            I build web platforms, automation pipelines, and full-stack products
             solving real business problems with clean, reliable code. Remote-first,
             working with clients across the USA &amp; Europe.
           </p>
@@ -1424,7 +1438,7 @@ function ClosingCta({ onOpenContact }) {
             display: "inline-flex", alignItems: "center", flexWrap: "wrap",
             justifyContent: "center", gap: "clamp(10px,1.4vw,24px)",
           }}>
-            Letâ€™s Move
+            Let's Move
             <video
               src="/Contact.mp4"
               autoPlay loop muted playsInline
@@ -1650,10 +1664,10 @@ function Testimonial() {
             fontSize: "clamp(15px,1.5vw,21px)", lineHeight: 1.6,
             color: "#eef2f6",
           }}>
-            We delivered an exceptional website representing the clientâ€™s business
+            We delivered an exceptional website representing the client's business
             and services. The site was user-friendly, visually appealing, and
-            well-planned. The teamâ€™s responsibility and cooperation in meeting all
-            requirements with precision were remarkableâ€¦
+            well-planned. The team's responsibility and cooperation in meeting all
+            requirements with precision were remarkable...
           </p>
 
           <div style={{

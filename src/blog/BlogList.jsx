@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import CASE_STUDIES from "./caseStudyData";
 import BlogNav from "./BlogNav";
+import { resetPageMetadata, setPageMetadata } from "../seo";
 
 // â”€â”€â”€ REUSED FROM APP.JS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function useMouse() {
@@ -241,6 +242,15 @@ function SimpleNav({ isMobile, scrollY }) {
 
 // â”€â”€â”€ BLOG LIST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function BlogList() {
+  useEffect(() => {
+    setPageMetadata({
+      title: "Web Development Blog & Case Studies | Aqib Faraz",
+      description: "Read web development guides and explore React, MERN, Python automation and digital experience case studies by Aqib Faraz.",
+      path: "/blog/",
+    });
+    return resetPageMetadata;
+  }, []);
+
   const mouse = useMouse();
   const isMobile = useIsMobile();
   const scrollY = useScrollY();
