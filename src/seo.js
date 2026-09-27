@@ -1,6 +1,6 @@
 const SITE_URL = "https://aqibfaraz.dev";
-const DEFAULT_TITLE = "Custom CRM, Design, App & Web Development | Aqib Faraz";
-const DEFAULT_DESCRIPTION = "Full-Stack Developer from Karachi specializing in MERN stack, React, Node.js, Python automation, Flutter and AI/ML. Available for remote freelance projects worldwide.";
+const DEFAULT_TITLE = "Aqib Faraz | Web, CRM, App & Automation Developer";
+const DEFAULT_DESCRIPTION = "Aqib Faraz is a Karachi-based full-stack developer building websites, CRM systems, e-commerce platforms, mobile apps and automation solutions for clients worldwide.";
 const DEFAULT_IMAGE = `${SITE_URL}/new%20projects.jpg`;
 
 function setMeta(attribute, value, content) {
@@ -14,7 +14,8 @@ function setMeta(attribute, value, content) {
 }
 
 export function setPageMetadata({ title, description, path = "/", type = "website" }) {
-  const canonicalUrl = `${SITE_URL}${path}`;
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  const canonicalUrl = `${SITE_URL}${normalizedPath}`;
   document.title = title;
   setMeta("name", "description", description);
   setMeta("property", "og:type", type);
@@ -22,9 +23,16 @@ export function setPageMetadata({ title, description, path = "/", type = "websit
   setMeta("property", "og:description", description);
   setMeta("property", "og:url", canonicalUrl);
   setMeta("property", "og:image", DEFAULT_IMAGE);
+  setMeta("property", "og:image:alt", "Aqib Faraz - Full-Stack Developer");
   setMeta("name", "twitter:title", title);
   setMeta("name", "twitter:description", description);
   setMeta("name", "twitter:image", DEFAULT_IMAGE);
+  setMeta("name", "twitter:card", "summary_large_image");
+  setMeta("name", "twitter:image:alt", "Aqib Faraz - Full-Stack Developer");
+
+  if (type === "article") {
+    setMeta("property", "article:author", "Aqib Faraz");
+  }
 
   let canonical = document.head.querySelector('link[rel="canonical"]');
   if (!canonical) {
