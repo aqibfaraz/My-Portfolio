@@ -2456,9 +2456,14 @@ function AppContent() {
   const isMobile = useIsMobile();
   const location = useLocation();
   const [contactSide, setContactSide] = useState(null);
+  const hasTrackedInitialPage = useRef(false);
 
   useEffect(() => {
     if (typeof window.gtag !== "function") return;
+    if (!hasTrackedInitialPage.current) {
+      hasTrackedInitialPage.current = true;
+      return;
+    }
 
     const pagePath = `${location.pathname}${location.search}${location.hash}`;
     window.gtag("event", "page_view", {
