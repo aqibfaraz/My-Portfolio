@@ -21,8 +21,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "preinstall": "node dist/setup.js"
+    "eject": "react-scripts eject"
   },
   "reactSnap": {
     "source": "build"
