@@ -4,8 +4,6 @@ const path = require("path");
 const buildDir = path.resolve(__dirname, "..", "build");
 const indexPath = path.join(buildDir, "index.html");
 
-fs.copyFileSync(indexPath, path.join(buildDir, "404.html"));
-
 const routes = [
 	{
 		path: "blog",
@@ -51,28 +49,49 @@ const routes = [
  	},
 ];
 
+if (!fs.existsSync(buildDir) || !fs.existsSync(indexPath)) {
+	console.warn("postbuild skipped: build/index.html not found");
+	process.exit(0);
+}
+
 const sourceHtml = fs.readFileSync(indexPath, "utf8");
+
+function escapeHtmlAttribute(value) {
+	return String(value)
+		.replaceAll("&", "&amp;")
+		.replaceAll("\"", "&quot;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;");
+}
 
 function rewriteRelativeAssets(html, prefix) {
 	return html.replace(/(src|href)="(?!https?:|#|\/|data:|mailto:)([^"]+)"/g, (_match, attribute, value) => {
-		return `${attribute}="${prefix}${value}"`;
+		const rewritten = `${prefix}${value}`.replace(/\/\.\//g, "/");
+		return `${attribute}="${rewritten}"`;
 	});
 }
+
+const fallbackHtml = rewriteRelativeAssets(sourceHtml, "/");
+fs.writeFileSync(path.join(buildDir, "404.html"), fallbackHtml);
 
 for (const route of routes) {
 	const routeDir = path.join(buildDir, route.path);
 	const prefix = "../".repeat(route.path.split("/").length);
 	const canonical = `https://aqibfaraz.dev/${route.path}/`;
+	const safeTitle = escapeHtmlAttribute(route.title);
+	const safeDescription = escapeHtmlAttribute(route.description);
+	const safeCanonical = escapeHtmlAttribute(canonical);
+	const safeType = escapeHtmlAttribute(route.type);
 	const routeHtml = sourceHtml
-		.replace(/<title>[^<]*<\/title>/, `<title>${route.title}</title>`)
-		.replace(/(<meta name="description" content=")[^"]*(")/, `$1${route.description}$2`)
-		.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${canonical}$2`)
-		.replace(/(<meta property="og:type" content=")[^"]*(")/, `$1${route.type}$2`)
-		.replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${route.title}$2`)
-		.replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${route.description}$2`)
-		.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${canonical}$2`)
-		.replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${route.title}$2`)
-		.replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${route.description}$2`);
+		.replace(/<title>[^<]*<\/title>/, `<title>${safeTitle}</title>`)
+		.replace(/(<meta name="description" content=")[^"]*(")/, `$1${safeDescription}$2`)
+		.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${safeCanonical}$2`)
+		.replace(/(<meta property="og:type" content=")[^"]*(")/, `$1${safeType}$2`)
+		.replace(/(<meta property="og:title" content=")[^"]*(")/, `$1${safeTitle}$2`)
+		.replace(/(<meta property="og:description" content=")[^"]*(")/, `$1${safeDescription}$2`)
+		.replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${safeCanonical}$2`)
+		.replace(/(<meta name="twitter:title" content=")[^"]*(")/, `$1${safeTitle}$2`)
+		.replace(/(<meta name="twitter:description" content=")[^"]*(")/, `$1${safeDescription}$2`);
 	const routeHtmlWithAssets = rewriteRelativeAssets(routeHtml, prefix);
 	fs.mkdirSync(routeDir, { recursive: true });
 	fs.writeFileSync(path.join(routeDir, "index.html"), routeHtmlWithAssets);
