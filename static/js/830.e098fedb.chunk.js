@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkaqib_faraz_portfolio=globalThis.webpackChunkaqib_faraz_portfolio||[]).push([[830],{830(a,t,e){a.exports=e.p+"static/media/flutter-vs-react-native.0abe790b2fb36fae77c9.md"}}]);
