@@ -13,16 +13,15 @@
     "react-scripts": "^5.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "node api.js && react-scripts start",
+    "build": "node api.js && react-scripts build",
     "postbuild": "node scripts/postbuild.js",
     "seo:prerender": "react-snap",
     "build:seo": "react-scripts build && react-snap",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "preinstall": "node dist/setup.js"
+    "eject": "react-scripts eject"
   },
   "reactSnap": {
     "source": "build"
