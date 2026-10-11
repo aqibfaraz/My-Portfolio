@@ -2,7 +2,7 @@
   "name": "aqib-faraz-portfolio",
   "version": "1.0.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://aqibfaraz.dev",
   "dependencies": {
     "gh-pages": "^6.1.1",
     "gray-matter": "^4.0.3",
@@ -16,19 +16,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "postbuild": "node scripts/postbuild.js",
-    "seo:prerender": "react-snap",
-    "build:seo": "react-scripts build && react-snap",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "reactSnap": {
-    "source": "build"
-  },
-  "devDependencies": {
-    "react-snap": "^1.23.0"
-  },
+  "devDependencies": {},
   "eslintConfig": {
     "extends": [
       "react-app"
