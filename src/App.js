@@ -2392,7 +2392,7 @@ function Footer() {
       <span style={{
         fontFamily: "'Space Mono',monospace", fontSize: 11,
         color: "rgba(255,255,255,0.16)", letterSpacing: "0.12em",
-      }}>Â© 2025 Aqib Faraz</span>
+      }}>@ 2025 Aqib Faraz - <a href="mailto:aqibfahraz@gmail.com" style={{ color: "inherit", textDecoration: "none" }}>aqibfahraz@gmail.com</a></span>
       <a href="https://aqibfaraz.dev" style={{
         fontFamily: "'Space Mono',monospace", fontSize: 11,
         color: "rgba(255,255,255,0.52)", letterSpacing: "0.15em", textDecoration: "none",
