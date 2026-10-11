@@ -750,7 +750,7 @@ function Hero({ isMobile, scrollY }) {
         >
           <video
             ref={heroVideoRef}
-            src="/Hero%20Section.mp4"
+            src="https://res.cloudinary.com/jj8ju519/video/upload/v1791715047/Hero_Section.mp4"
             autoPlay loop playsInline muted={videoMuted} preload="metadata"
             poster="/new%20projects.jpg"
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
@@ -889,7 +889,7 @@ function Hero({ isMobile, scrollY }) {
           overflow: "hidden", borderRadius: 4, background: "#02060a",
         }}>
           <video
-            src="/Hero%20Section.mp4"
+            src="https://res.cloudinary.com/jj8ju519/video/upload/v1791715047/Hero_Section.mp4"
             autoPlay loop playsInline muted
             style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
           />
