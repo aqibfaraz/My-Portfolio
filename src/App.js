@@ -1450,11 +1450,6 @@ function Faq({ onOpenContact }) {
             fontSize: "clamp(28px,3.8vw,58px)", lineHeight: 1.1,
             letterSpacing: "-0.01em", textTransform: "uppercase", color: "#eef2f6",
           }}>Frequently Asked Questions</h2>
-          <p style={{
-            margin: "-48px 0 clamp(36px,5vw,80px)",
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "clamp(14px,1.2vw,17px)",
-            lineHeight: 1.6, color: "rgba(255,255,255,0.6)",
-          }}>Answers to the questions clients ask me most often.</p>
           <div>
             {FAQS.map((item, i) => (
               <FAQAccordion
