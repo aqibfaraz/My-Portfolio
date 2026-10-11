@@ -449,6 +449,7 @@ const NAV_LINKS = [
   { label: "Portfolio", href: "#work-proud" },
   { label: "Services", href: "#services" },
   { label: "Technologies", href: "#our-technologies" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 function Nav({ scrollY, isMobile, onOpenContact }) {
@@ -1277,24 +1278,61 @@ function ServiceRow({ s, open, onToggle }) {
 // â”€â”€â”€ FAQ â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 // Answers are placeholders â€” send the real copy and I'll drop it in.
 const FAQS = [
-  { q: "What is the price for development?", a: "" },
-  { q: "What terms do I offer?", a: "" },
-  { q: "What am I offering for website promotion?", a: "" },
-  { q: "How do I estimate the cost?", a: "" },
-  { q: "What services does my support service provide?", a: "" },
-  { q: "What is the difference between a custom solution and a ready-made solution?", a: "" },
-  { q: "How is the website development process conducted?", a: "" },
+  { q: "What is the price for development?", a: "It depends on what you need built. A business or portfolio website usually starts at $ 200, an online store at $ 400 and a CRM or custom web application at $ 600. Mobile apps start at $ 600. These are starting points, since every project has its own requirements. Once I understand what you want, I send a fixed quote with everything itemized, so there are no surprises later." },
+  { q: "What terms do I offer?", a: "Before any work starts, we agree on the scope, deliverables and timeline in writing. Payment is split into milestones, normally 25% upfront and the rest as the work progresses or on delivery. You get the full source code and complete ownership once the final payment is made. Each project includes [2] rounds of revisions, and I am happy to sign an NDA if you need one. I also send regular updates, so you always know where things stand." },
+  { q: "What am I offering for website promotion?", a: "I set up your website so search engines can find and understand it. That covers page speed, clean code, mobile friendliness, meta tags, schema markup and keyword research for your pages. I also connect Google Search Console and Google Analytics so you can see where your visitors come from. On top of that, I make sure links to your site look good when shared on social media, and I design pages so visitors are guided toward contacting you or buying." },
+  { q: "How do I estimate the cost?", a: "The estimate depends on a few things: how many pages or screens you need, which features are involved (payments, user accounts, dashboards, automation, third-party integrations), how custom the design is, and how quickly you need it done. Send me your requirements and I will reply with a detailed estimate, usually within 24 hours." },
+  { q: "What services does my support service provide?", a: "After your site goes live, I stay available to fix bugs, apply security updates, take backups, keep an eye on performance, and make content or feature changes when you need them. I can also help with hosting and domain issues. Every project includes [30] days of free support after launch. After that, you can choose a monthly maintenance plan starting at $100  per month, or just contact me whenever something comes up." },
+  { q: "What is the difference between a custom solution and a ready-made solution?", a: "A ready-made solution, such as a template or a pre-built platform, is cheaper and faster to launch, but you are limited to what it offers. A custom solution is built around your business, so the design is unique and the features match how you actually work. It costs more upfront and takes longer, but it grows with you and does not hold you back later.", table: [
+    ["Feature", "Custom Solution", "Ready-Made Solution"],
+    ["Cost", "Higher upfront", "Lower upfront"],
+    ["Design", "Unique and built around your brand", "Template based"],
+    ["Features", "Exactly what your business needs", "Limited to what the template offers"],
+    ["Scalability", "Grows with your business", "Can become restrictive"],
+    ["Launch time", "Takes longer", "Much faster"],
+    ["Best for", "Growing businesses and unique workflows", "Startups and tight budgets"],
+  ], closing: "Not sure which one suits you? Tell me about your project and I will give you an honest recommendation." },
+  { q: "How is the website development process conducted?", a: "Every project follows the same steps, so you always know what comes next.", steps: [
+    "Discovery: We talk about your goals, your audience and what you need.",
+    "Proposal: You receive the scope, timeline and quote.",
+    "Design: I prepare the layout and visual direction for your approval.",
+    "Development: I build the site with the technology that fits best, such as React, Node.js or Shopify, and share progress along the way.",
+    "Testing: I check it on different browsers and devices, and test speed and security.",
+    "Launch: I handle deployment, domain and hosting setup, and basic SEO.",
+    "Support: I stay available after launch for fixes and updates.",
+  ] },
 ];
 
-function FaqRow({ item, open, onToggle }) {
+const FAQ_SCHEMA = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQS.map(item => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: [
+        item.a,
+        item.table && item.table.slice(1).map(row => `${row[0]}: ${row[1]} | ${row[2]}`).join("; "),
+        item.closing,
+        item.steps && item.steps.join(" "),
+      ].filter(Boolean).join(" "),
+    },
+  })),
+};
+
+function FAQAccordion({ item, index, open, onToggle }) {
   const [hov, setHov] = useState(false);
+  const answerId = `faq-answer-${index}`;
   return (
     <div style={{ borderTop: "1px solid rgba(255,255,255,0.14)" }}>
       <button
+        type="button"
         onClick={onToggle}
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
         aria-expanded={open}
+        aria-controls={answerId}
         style={{
           width: "100%", background: "none", border: "none", cursor: "pointer",
           display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -1316,14 +1354,30 @@ function FaqRow({ item, open, onToggle }) {
           <path d="M6 6l12 12M18 8v10H8" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
-      {open && (
-        <p style={{
-          margin: "0 0 clamp(20px,2.4vw,32px)", maxWidth: 720,
-          fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 400,
-          fontSize: "clamp(14px,1.25vw,17px)", lineHeight: 1.7,
-          color: "rgba(255,255,255,0.6)",
-        }}>{item.a || "Answer coming soon."}</p>
-      )}
+      <div id={answerId} role="region" aria-hidden={!open} style={{
+        display: "grid", gridTemplateRows: open ? "1fr" : "0fr",
+        opacity: open ? 1 : 0,
+        transition: "grid-template-rows 0.4s ease, opacity 0.25s ease",
+      }}>
+        <div style={{ overflow: "hidden" }}>
+          <div style={{
+            padding: "0 0 clamp(20px,2.4vw,32px)", maxWidth: 840,
+            fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 400,
+            fontSize: "clamp(14px,1.25vw,17px)", lineHeight: 1.7,
+            color: "rgba(255,255,255,0.6)",
+          }}>
+            <p style={{ margin: 0 }}>{item.a}</p>
+            {item.table && <div style={{ overflowX: "auto", marginTop: 24 }}>
+              <table style={{ width: "100%", minWidth: 620, borderCollapse: "collapse", textAlign: "left" }}>
+                <thead><tr>{item.table[0].map(cell => <th key={cell} style={{ padding: "12px 14px", color: "#eef2f6", borderBottom: "1px solid rgba(255,255,255,0.2)", fontWeight: 700 }}>{cell}</th>)}</tr></thead>
+                <tbody>{item.table.slice(1).map(row => <tr key={row[0]}>{row.map(cell => <td key={cell} style={{ padding: "12px 14px", borderBottom: "1px solid rgba(255,255,255,0.1)", verticalAlign: "top" }}>{cell}</td>)}</tr>)}</tbody>
+              </table>
+            </div>}
+            {item.closing && <p style={{ margin: "24px 0 0" }}>{item.closing}</p>}
+            {item.steps && <ol style={{ margin: "18px 0 0 22px", padding: 0 }}>{item.steps.map(step => <li key={step} style={{ paddingLeft: 6, marginBottom: 8 }}>{step}</li>)}</ol>}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -1395,12 +1449,18 @@ function Faq({ onOpenContact }) {
             fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 400,
             fontSize: "clamp(28px,3.8vw,58px)", lineHeight: 1.1,
             letterSpacing: "-0.01em", textTransform: "uppercase", color: "#eef2f6",
-          }}>Frequently asked questions and answers</h2>
+          }}>Frequently Asked Questions</h2>
+          <p style={{
+            margin: "-48px 0 clamp(36px,5vw,80px)",
+            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "clamp(14px,1.2vw,17px)",
+            lineHeight: 1.6, color: "rgba(255,255,255,0.6)",
+          }}>Answers to the questions clients ask me most often.</p>
           <div>
             {FAQS.map((item, i) => (
-              <FaqRow
+              <FAQAccordion
                 key={item.q}
                 item={item}
+                index={i}
                 open={open === i}
                 onToggle={() => setOpen(open === i ? null : i)}
               />
@@ -1408,6 +1468,7 @@ function Faq({ onOpenContact }) {
           </div>
         </div>
       </div>
+      <script type="application/ld+json">{JSON.stringify(FAQ_SCHEMA)}</script>
     </section>
   );
 }
